@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet private weak var loginTypeSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var signInButton: UIButton!
     
-    var apiController: GigController?
+    var gigController: GigController?
     var loginType = LoginType.signUp
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Action Handlers
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        guard let apiController = apiController else { return }
+        guard let gigController = gigController else { return }
         
         guard let username = usernameTextField.text,
         username.isEmpty == false,
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         switch loginType {
         case.signUp:
-            apiController.signUp(with: user) { (error) in
+            gigController.signUp(with: user) { (error) in
                 guard error == nil else {
                     print("Error signing up: \(error!)")
                     return
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             
         case.signIn:
-            apiController.signIn(with: user) { (error) in
+            gigController.signIn(with: user) { (error) in
                 guard error == nil else {
                     print("Error logging in: \(error!)")
                     return
