@@ -14,9 +14,19 @@ enum HTTPMethod: String {
     case post = "POST"
 }
 
+enum NetworkError: Error {
+    case noAuth
+    case unauthorized
+    case otherError(Error)
+    case noData
+    case decodeFailed
+    case encodeFailed
+}
+
 class GigController {
     // MARK: - Public Properties
     var bearer: Bearer?
+    var gigs: [Gig] = []
     
     // MARK: - Private Properties
     private let baseUrl = URL(string: "https://lambdagigapi.herokuapp.com/api")!
@@ -104,8 +114,86 @@ class GigController {
         }.resume()
     }
     
-    // create function for fetching all animal names
+    // Fetch gigs
+    func fetchGigs(completion: @escaping (Result<[Gig], NetworkError>) -> Void) {
+        guard let bearer = bearer else {
+            completion(.failure(.noAuth))
+            return
+        }
+        
+        let fetchUrl = baseUrl.appendingPathComponent("/gigs/")
+        var request = URLRequest(url: fetchUrl)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let response = response as? HTTPURLResponse,
+                response.statusCode == 401 {
+                completion(.failure(.unauthorized))
+                return
+            }
+            
+            guard error == nil else {
+                completion(.failure(.otherError(error!)))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            do {
+                let decodedGigs = try decoder.decode([Gig].self, from: data)
+                completion(.success(decodedGigs))
+            } catch {
+                completion(.failure(.decodeFailed))
+            }
+        }.resume()
+    }
     
-    // create function to fetch image
-    
+    // Create gigs
+    func createGig(gig: Gig, completion: @escaping (NetworkError?) -> Void) {
+        guard let bearer = bearer else {
+            completion(.noAuth)
+            return
+        }
+        
+        let createGigUrl = baseUrl.appendingPathComponent("/gigs/")
+        
+        var request = URLRequest(url: createGigUrl)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.dateEncodingStrategy = .iso8601
+        do {
+            let jsonData = try jsonEncoder.encode(gig)
+            request.httpBody = jsonData
+        } catch {
+            print("Error encoding gig object: \(error)")
+            completion(.encodeFailed)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("Error posting gig data: \(error)")
+                completion(.otherError(error))
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse,
+                response.statusCode == 401 {
+                completion(.unauthorized)
+                return
+            }
+            
+            self.gigs.append(gig)
+            completion(nil)
+        }.resume()
+    }
 }

@@ -56,5 +56,11 @@ class GigsTableViewController: UITableViewController {
                 let loginVC = segue.destination as? LoginViewController {
                 loginVC.gigController = gigController
             }
-        }
+            
+//    } else if segue.identifier == "AddGigSegue",
+//        let addGigVC = segue.destination as? AnimalDetailViewController,
+//        let selectedIndexPath = tableView.indexPathForSelectedRow {
+//        detailVC.apiController = apiController
+//        detailVC.animalName = animalNames[selectedIndexPath.row]
     }
+}
