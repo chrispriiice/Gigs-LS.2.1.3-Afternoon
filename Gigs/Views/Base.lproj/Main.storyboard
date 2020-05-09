@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7jH-KH-mZW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7jH-KH-mZW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -156,39 +156,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gXc-q7-w73">
-                                <rect key="frame" x="159" y="85" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-Dp-eMp">
-                                <rect key="frame" x="142" y="44" width="131" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Sign-Up"/>
-                                    <segment title="Sign-In"/>
-                                </segments>
-                                <connections>
-                                    <action selector="signInTypeChanged:" destination="lv2-Dy-yRE" eventType="valueChanged" id="Ko9-L9-ch6"/>
-                                </connections>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wJ-iY-ECN">
-                                <rect key="frame" x="179" y="169" width="57" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign-Up"/>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="lv2-Dy-yRE" eventType="touchUpInside" id="hwh-A4-pUo"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="be0-tb-sjE">
-                                <rect key="frame" x="159" y="127" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vDI-Dh-AJs">
+                                <rect key="frame" x="16" y="84" width="382" height="173"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-Dp-eMp">
+                                        <rect key="frame" x="120.5" y="0.0" width="141" height="32"/>
+                                        <segments>
+                                            <segment title="Sign-Up"/>
+                                            <segment title="Sign-In"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="signInTypeChanged:" destination="lv2-Dy-yRE" eventType="valueChanged" id="Ko9-L9-ch6"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gXc-q7-w73">
+                                        <rect key="frame" x="0.0" y="39" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="be0-tb-sjE">
+                                        <rect key="frame" x="0.0" y="81" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wJ-iY-ECN">
+                                        <rect key="frame" x="162.5" y="123" width="57" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Yn9-5v-Z8E"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign-Up"/>
+                                        <connections>
+                                            <action selector="buttonTapped:" destination="lv2-Dy-yRE" eventType="touchUpInside" id="hwh-A4-pUo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gXc-q7-w73" secondAttribute="trailing" id="F5J-oj-HQ6"/>
+                                    <constraint firstAttribute="trailing" secondItem="be0-tb-sjE" secondAttribute="trailing" id="WAg-Wg-Kgg"/>
+                                    <constraint firstItem="be0-tb-sjE" firstAttribute="leading" secondItem="vDI-Dh-AJs" secondAttribute="leading" id="eZN-wC-atF"/>
+                                    <constraint firstItem="gXc-q7-w73" firstAttribute="leading" secondItem="vDI-Dh-AJs" secondAttribute="leading" id="vH2-J0-vKi"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vDI-Dh-AJs" firstAttribute="leading" secondItem="dnl-e4-VfI" secondAttribute="leading" constant="16" id="Dv8-gr-rXi"/>
+                            <constraint firstItem="vDI-Dh-AJs" firstAttribute="top" secondItem="dnl-e4-VfI" secondAttribute="top" constant="40" id="nL3-fc-dxk"/>
+                            <constraint firstItem="dnl-e4-VfI" firstAttribute="trailing" secondItem="vDI-Dh-AJs" secondAttribute="trailing" constant="16" id="sIr-9e-JTI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dnl-e4-VfI"/>
                     </view>
                     <connections>
