@@ -12,55 +12,62 @@ class GigsTableViewController: UITableViewController {
     
     // MARK: - Properties
     var gigController = GigController()
-    private var gigs: [String] = []
     
-        // MARK: - View Lifecycle
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
+    let dateFormatter: DateFormatter = {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .short
+      return formatter
+    }()
+    
+    // MARK: - View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if gigController.bearer == nil {
+            performSegue(withIdentifier: "LoginViewModalSegue", sender: self)
         }
         
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            if gigController.bearer == nil {
-                performSegue(withIdentifier: "LoginViewModalSegue", sender: self)
-            }
-
-        }
-
-        // MARK: - Table view data source
-
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return gigs.count
-        }
-
-        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GigsCell", for: indexPath)
-
-            // Configure the cell...
-            cell.textLabel?.text = gigs[indexPath.row]
-
-            return cell
-        }
-
-        // MARK: - Actions
+    }
+    
+    // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return gigController.gigs.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GigsCell", for: indexPath)
         
-        @IBAction func getGigs(_ sender: UIBarButtonItem) {
-            // fetch all gigs from API
-        }
+        // Configure the cell...
+        cell.textLabel?.text = gigController.gigs[indexPath.row].title
+        cell.detailTextLabel?.text = dateFormatter.string(from: gigController.gigs[indexPath.row].dueDate)
         
-        // MARK: - Navigation
-
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "LoginViewModalSegue",
-                let loginVC = segue.destination as? LoginViewController {
-                loginVC.gigController = gigController
-            }
+        return cell
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func getGigs(_ sender: UIBarButtonItem) {
+        // fetch all gigs from API
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "LoginViewModalSegue",
+            let loginVC = segue.destination as? LoginViewController {
+            loginVC.gigController = gigController
+        }
             
-//    } else if segue.identifier == "AddGigSegue",
-//        let addGigVC = segue.destination as? AnimalDetailViewController,
-//        let selectedIndexPath = tableView.indexPathForSelectedRow {
-//        detailVC.apiController = apiController
-//        detailVC.animalName = animalNames[selectedIndexPath.row]
+        else if segue.identifier == "GigDetailViewController",
+            let detailVC = segue.destination as? GigDetailViewController,
+            let selectedIndexPath = tableView.indexPathForSelectedRow {
+            detailVC.gigController = gigController
+            detailVC.gig = gigController.gigs[selectedIndexPath.row]
+        }
     }
 }

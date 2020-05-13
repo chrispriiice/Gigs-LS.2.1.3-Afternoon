@@ -157,14 +157,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vDI-Dh-AJs">
-                                <rect key="frame" x="16" y="84" width="382" height="173"/>
+                                <rect key="frame" x="16" y="84" width="382" height="163"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ylk-Dp-eMp">
                                         <rect key="frame" x="120.5" y="0.0" width="141" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <segments>
                                             <segment title="Sign-Up"/>
                                             <segment title="Sign-In"/>
                                         </segments>
+                                        <color key="selectedSegmentTintColor" red="0.31372549020000001" green="0.84705882349999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="signInTypeChanged:" destination="lv2-Dy-yRE" eventType="valueChanged" id="Ko9-L9-ch6"/>
                                         </connections>
@@ -180,19 +182,24 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wJ-iY-ECN">
-                                        <rect key="frame" x="162.5" y="123" width="57" height="50"/>
+                                        <rect key="frame" x="60" y="123" width="262" height="40"/>
+                                        <color key="backgroundColor" red="0.31372549020000001" green="0.84705882349999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Yn9-5v-Z8E"/>
+                                            <constraint firstAttribute="height" constant="40" id="Yn9-5v-Z8E"/>
                                         </constraints>
-                                        <state key="normal" title="Sign-Up"/>
+                                        <state key="normal" title="Sign-Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="buttonTapped:" destination="lv2-Dy-yRE" eventType="touchUpInside" id="hwh-A4-pUo"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7wJ-iY-ECN" secondAttribute="trailing" constant="60" id="0gQ-eO-Npc"/>
                                     <constraint firstAttribute="trailing" secondItem="gXc-q7-w73" secondAttribute="trailing" id="F5J-oj-HQ6"/>
                                     <constraint firstAttribute="trailing" secondItem="be0-tb-sjE" secondAttribute="trailing" id="WAg-Wg-Kgg"/>
+                                    <constraint firstItem="7wJ-iY-ECN" firstAttribute="leading" secondItem="vDI-Dh-AJs" secondAttribute="leading" constant="60" id="Ybz-HV-Gnb"/>
                                     <constraint firstItem="be0-tb-sjE" firstAttribute="leading" secondItem="vDI-Dh-AJs" secondAttribute="leading" id="eZN-wC-atF"/>
                                     <constraint firstItem="gXc-q7-w73" firstAttribute="leading" secondItem="vDI-Dh-AJs" secondAttribute="leading" id="vH2-J0-vKi"/>
                                 </constraints>

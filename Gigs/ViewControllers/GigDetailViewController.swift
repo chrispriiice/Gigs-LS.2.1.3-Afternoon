@@ -14,13 +14,24 @@ class GigDetailViewController: UIViewController {
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var descriptiopnTextView: UITextView!
     
-    
+    var gigController: GigController!
+    var gig: Gig? {
+        didSet {
+            updateViews()
+        }
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
+        // SAVE 
     }
     
+    func updateViews() {
+        // FINISH
+    }
 
 }

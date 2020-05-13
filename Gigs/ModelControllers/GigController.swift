@@ -192,8 +192,10 @@ class GigController {
                 return
             }
             
-            self.gigs.append(gig)
-            completion(nil)
+            if !self.gigs.contains(gig) {
+                self.gigs.append(gig)
+                completion(nil)
+            }
         }.resume()
     }
 }
